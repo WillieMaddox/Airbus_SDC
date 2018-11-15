@@ -1,0 +1,25 @@
+{
+    "base_model": "2018_1106_0733_11_GCN_384_bcedice_deconv",
+    "gaussian_noise": null,
+    "normalize_input_batch": true,
+    "dropout": 0,
+    "learn_rate": 0.0015,
+    "loss_function": "focal_soft_dice_loss",
+    "loss_function_kwargs": {
+        "gamma": 2.0,
+        "alpha": 0.25,
+        "axis": -1
+    },
+    "mask_method": "fullmasks",
+    "img_size": 768,
+    "crop_size": 768,
+    "edge_crop": 0,
+    "batch_size": 4,
+    "input_shape": [
+        null,
+        null,
+        3
+    ],
+    "train_img_count": 16384,
+    "valid_img_count": -1
+}
