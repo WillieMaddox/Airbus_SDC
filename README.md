@@ -13,4 +13,4 @@ In this competition I explored a host of new ideas:
  
 Here are some of the results (middle column) from my best (0.82) submission.
 
-![Prediction compared to ground truth](out/fullmasks_768_worst_batch_20_row_5.jpg)
+![Prediction compared to ground truth](out/2018_1107_1009_43_GCN_768_focaldice_deconv/fullmasks_768_worst_batch_20_row_5.jpg)
