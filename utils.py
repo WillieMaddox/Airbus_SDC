@@ -46,7 +46,7 @@ def reversed_recombined_holt_winters(x, span=15, beta=0.3):
 def rle_encode(img):
     """
     img: numpy array, 1 - mask, 0 - background
-    Returns run length as string formated
+    Returns run length as string formatted
     """
     pixels = img.T.flatten()
     pixels = np.concatenate([[0], pixels, [0]])
@@ -57,7 +57,7 @@ def rle_encode(img):
 
 def rle_decode(mask_rle, shape=(768, 768)):
     """
-    mask_rle: run-length as string formated (start length)
+    mask_rle: run-length as string formatted (start length)
     shape: (height,width) of array to return
     Returns numpy array, 1 - mask, 0 - background
     """
