@@ -313,6 +313,7 @@ def bce(y_true, y_pred, **kwargs):
     out = -(y_true * np.log(y_pred) + (1.0 - y_true) * np.log(1.0 - y_pred))
     return np.mean(out, axis=-1)
 
+
 def soft_dice_coef(y_true, y_pred, axis=-1, smooth=1e-3):
     AB = np.sum(y_true * y_pred, axis=axis)
     A = np.sum(y_true, axis=axis)
@@ -373,6 +374,10 @@ def focal_soft_dice_loss_wrapper(gamma=2., alpha=.25, focal_coef=0.5, axis=-1, s
         return focal_loss(y_true, y_pred) * focal_coef + soft_dice_loss(y_true, y_pred, axis=axis, smooth=smooth) * (1. - focal_coef)
 
     return focal_soft_dice_loss
+
+
+def normalized_hamming_distance(hash1, hash2):
+    return np.mean((hash1 != hash2) * 1)
 
 
 def random_crop(img, crop_size):
