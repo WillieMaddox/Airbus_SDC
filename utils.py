@@ -5,6 +5,9 @@ from skimage.io import imread
 from skimage.segmentation import find_boundaries
 from skimage.morphology import label
 from skimage.filters import gaussian
+from tqdm import tqdm
+import h5py
+import cv2
 
 EPS = np.finfo(np.float32).eps
 
@@ -14,6 +17,22 @@ def get_datetime_now(t=None, fmt='%Y_%m%d_%H%M_%S'):
     if t is None:
         t = datetime.now()
     return t.strftime(fmt)
+
+
+def create_hdf5_dataset(data_dir=None, outfile=None):
+    if data_dir in (None, '.'):
+        data_dir = os.path.join(os.getcwd(), 'data', 'train_768')
+    # if data_dir is None:
+    #     data_dir = "/media/Borg_LS/DATA/geos/airbus/input/train_768"
+    if outfile is None:
+        outfile = data_dir + ".h5"
+
+    img_ids = os.listdir(data_dir)
+
+    with h5py.File(outfile, 'w') as h5:
+        for img_id in tqdm(img_ids):
+            img = cv2.imread(os.path.join(data_dir, img_id))
+            h5.create_dataset(img_id, data=img)
 
 
 def quick_stats(arr):
