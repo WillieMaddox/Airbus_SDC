@@ -371,6 +371,10 @@ def soft_dice_loss2(y_true, y_pred, epsilon=1e-6):
     return 1 - numerator / (denominator + epsilon)
 
 
+def bce_soft_dice_loss_n0(y_true, y_pred, bce_weight=0.5):
+    return bce(y_true, y_pred) * bce_weight + soft_dice_loss(y_true, y_pred) * (1 - bce_weight)
+
+
 def focal_loss_wrapper(gamma=2., alpha=.25, axis=-1):
     def focal_loss(y_true, y_pred):
         y_pred_c = np.clip(y_pred, EPS, 1. - EPS)
@@ -380,10 +384,6 @@ def focal_loss_wrapper(gamma=2., alpha=.25, axis=-1):
         res0 = (1 - alpha) * np.power(pt_0, gamma) * np.log(1. - pt_0)
         return -np.mean(res1 + res0, axis=axis)
     return focal_loss
-
-
-def bce_soft_dice_loss_n0(y_true, y_pred, bce_weight=0.5):
-    return bce(y_true, y_pred) * bce_weight + soft_dice_loss(y_true, y_pred) * (1 - bce_weight)
 
 
 def focal_soft_dice_loss_wrapper(gamma=2., alpha=.25, focal_coef=0.5, axis=-1, smooth=1e-3):
